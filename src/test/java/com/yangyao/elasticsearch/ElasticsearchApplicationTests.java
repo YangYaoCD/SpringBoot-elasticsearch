@@ -24,11 +24,28 @@ public class ElasticsearchApplicationTests {
     @Autowired
     BookRepository bookRepository;
 
+
+    //第二种方法操作elasticsearch，最方便的方法
     @Test
     public void  test02(){
         Book book = new Book();
+        book.setId(1);
+        book.setAuthor("吴承恩");
+        book.setBookName("西游记");
         bookRepository.index(book);
     }
+
+    //模糊查询
+    @Test
+    public void test03(){
+        //快速for each：alt+enter然后第二个回车
+        for (Book book : bookRepository.findByBookNameLike("记")) {
+            System.out.println(book.toString());
+        }
+    }
+
+
+
 
     @Test
     public void contextLoads() {
